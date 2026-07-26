@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Gaon Sathi</string>
+    <string name="title_activity_main">Gaon Sathi</string>
+    <string name="package_name">com.gaonsathi.app</string>
+    <string name="custom_url_scheme">com.gaonsathi.app</string>
+</resources>
