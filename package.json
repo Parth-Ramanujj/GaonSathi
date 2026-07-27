@@ -1,32 +1,23 @@
 {
-  "name": "web",
-  "version": "0.1.0",
+  "name": "gaon-sathi",
+  "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
   },
-  "packageManager": "npm@10.8.2",
   "engines": {
-    "node": "24.x"
-  },
-  "dependencies": {
-    "@capacitor/android": "^8.4.2",
-    "@capacitor/core": "^8.4.2",
-    "@gaon-sathi/ui": "*",
-    "next": "16.2.12",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "node": "20.x",
+    "npm": "10.x"
   },
   "devDependencies": {
-    "@capacitor/cli": "^8.4.2",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.12",
-    "typescript": "^5"
-  }
+    "turbo": "latest"
+  },
+  "packageManager": "npm@10.8.2"
 }

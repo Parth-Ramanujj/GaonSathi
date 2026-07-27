@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500;600;700;800&family=Mukta+Vaani:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-turmeric: #E8A33D;
+  --color-turmeric-dark: #C97F1F;
+  --color-indigo: #1F3A5F;
+  --color-indigo-deep: #152A47;
+  --color-terracotta: #C1502E;
+  --color-soil: #3D2B1F;
+  --color-wheat: #F6EDE0;
+  --color-wheat-deep: #EEE1CC;
+  --color-leaf: #4C7A3D;
+  --color-leaf-deep: #3B6030;
+  --color-paper: #FBF6EC;
+  
+  --font-heading: 'Baloo Bhai 2', cursive;
+  --font-body: 'Mukta Vaani', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--color-wheat);
+  color: var(--color-soil);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base Components */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-turmeric {
+  background-color: var(--color-turmeric);
+  color: var(--color-indigo-deep);
+  box-shadow: 0px 4px 0px 0px var(--color-turmeric-dark);
+}
+.btn-turmeric:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px var(--color-turmeric-dark);
+}
+
+.btn-leaf {
+  background-color: var(--color-leaf);
+  color: white;
+  box-shadow: 0px 4px 0px 0px var(--color-leaf-deep);
+}
+.btn-leaf:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 0px 0px var(--color-leaf-deep);
+}
+
+.card {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-wheat-deep);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Bunting Divider Motif */
+.bunting-divider {
+  display: flex;
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+}
+
+.bunting-flag {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 20px solid;
+  margin-right: -5px;
+}
+.bunting-flag:nth-child(4n+1) { border-top-color: var(--color-turmeric); }
+.bunting-flag:nth-child(4n+2) { border-top-color: var(--color-leaf); }
+.bunting-flag:nth-child(4n+3) { border-top-color: var(--color-terracotta); }
+.bunting-flag:nth-child(4n+4) { border-top-color: var(--color-indigo); }
+
