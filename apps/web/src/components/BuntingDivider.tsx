@@ -1,8 +1,12 @@
 import React from 'react';
 
-export const BuntingDivider = () => {
+interface BuntingDividerProps extends React.HTMLAttributes<HTMLDivElement> {
+  flags?: number;
+}
+
+export const BuntingDivider: React.FC<BuntingDividerProps> = ({ flags, className, ...props }) => {
   return (
-    <div className="w-full overflow-hidden leading-0 flex justify-center py-4">
+    <div className={`w-full overflow-hidden leading-0 flex justify-center py-4 ${className || ''}`} {...props}>
       <svg
         viewBox="0 0 1200 120"
         preserveAspectRatio="none"
