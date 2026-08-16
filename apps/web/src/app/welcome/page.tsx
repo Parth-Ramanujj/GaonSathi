@@ -10,22 +10,22 @@ export default function WelcomePage() {
           Gaon Sathi
         </h1>
         <p style={{ fontSize: '1.25rem', color: 'var(--color-soil)', marginBottom: '3rem', textAlign: 'center' }}>
-          Welcome • स्वागत છે • स्वागत है
+          સ્વાગત છે • स्वागत है • Welcome
         </p>
 
         <div className="card" style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Select Language</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Select Language / ભાષા પસંદ કરો</h2>
           
           <Link href="/home" className="btn btn-turmeric" style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}>
-            ગુજરાતી (Enter App)
+            1. ગુજરાતી (Gujarati)
           </Link>
           
           <Link href="/home" className="btn btn-leaf" style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}>
-            हिंदी (Enter App)
+            2. हिंदी (Hindi)
           </Link>
           
           <Link href="/home" className="btn btn-indigo" style={{ width: '100%', textAlign: 'center', textDecoration: 'none', backgroundColor: 'var(--color-indigo)', color: 'white' }}>
-            English (Enter App)
+            3. English
           </Link>
 
           <Link href="/login" style={{ textAlign: 'center', color: 'var(--color-soil)', fontSize: '0.9rem', marginTop: '0.5rem', textDecoration: 'underline' }}>
