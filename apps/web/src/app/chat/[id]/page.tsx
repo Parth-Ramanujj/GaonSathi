@@ -1,30 +1,32 @@
-import { BuntingDivider } from '@/components/BuntingDivider';
-import '../../globals.css';
+'use client';
 
-export default function ChatConversationPage({ params }: { params: { id: string } }) {
+import React from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { BuntingDivider } from '@/lib/ui';
+
+export default function ChatConversationPage() {
+  const params = useParams();
+  const id = (params?.id as string) || 'conv';
+
   return (
     <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-wheat)' }}>
       <BuntingDivider flags={30} />
       
-      <div style={{ flex: 1, padding: '1rem', maxWidth: '800px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '1rem', backgroundColor: 'var(--color-paper)', borderBottom: '2px solid var(--color-wheat-deep)', borderRadius: '14px 14px 0 0' }}>
-          <h2 style={{ color: 'var(--color-indigo)', margin: 0 }}>Conversation #{params.id}</h2>
-        </div>
+      <div style={{ flex: 1, padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+        <Link href="/chat" style={{ color: 'var(--color-terracotta)', fontWeight: 'bold', display: 'inline-block', marginBottom: '1rem' }}>
+          ← Back to Messages
+        </Link>
+        
+        <h1 style={{ fontSize: '2.5rem', color: 'var(--color-indigo)', marginBottom: '1rem' }}>
+          Conversation {id}
+        </h1>
 
-        <div style={{ flex: 1, backgroundColor: 'white', padding: '1rem', overflowY: 'auto' }}>
-          {/* Chat messages would go here */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%', justifyContent: 'flex-end' }}>
-             <p style={{ textAlign: 'center', color: 'var(--color-soil)', opacity: 0.6 }}>This is the start of your conversation.</p>
-          </div>
-        </div>
-
-        <div style={{ padding: '1rem', backgroundColor: 'var(--color-paper)', borderRadius: '0 0 14px 14px', borderTop: '2px solid var(--color-wheat-deep)', display: 'flex', gap: '0.5rem' }}>
-          <input 
-            type="text" 
-            placeholder="Type a message..." 
-            style={{ flex: 1, padding: '12px', border: '1px solid var(--color-soil)', borderRadius: '8px' }}
-          />
-          <button className="btn btn-turmeric">Send</button>
+        <div className="card" style={{ backgroundColor: 'white' }}>
+          <p style={{ color: 'var(--color-soil)' }}>Redirecting to main village inbox...</p>
+          <Link href="/chat">
+            <button className="btn btn-indigo" style={{ marginTop: '1rem' }}>Open Village Inbox</button>
+          </Link>
         </div>
       </div>
     </main>

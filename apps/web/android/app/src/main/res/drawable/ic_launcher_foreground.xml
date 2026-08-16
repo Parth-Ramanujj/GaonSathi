@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Rolling Hills / Ground -->
+    <path
+        android:fillColor="#4C7B3B"
+        android:pathData="M0,80 Q30,70 60,85 T108,80 L108,108 L0,108 Z" />
+
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M25,25m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0" />
+
+    <!-- House -->
+    <!-- Main Body -->
+    <path
+        android:fillColor="#1E3A5F"
+        android:pathData="M65,85 L65,65 L90,65 L90,85 Z" />
+    <!-- Roof -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M62,65 L77.5,50 L93,65 Z" />
+    <!-- Door -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M74,85 L74,75 L81,75 L81,85 Z" />
+
+    <!-- A small Sprout/Plant -->
+    <path
+        android:fillColor="#4C7B3B"
+        android:pathData="M40,85 Q40,75 45,70 M40,85 Q40,75 35,70"
+        android:strokeColor="#4C7B3B"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+
+</vector>

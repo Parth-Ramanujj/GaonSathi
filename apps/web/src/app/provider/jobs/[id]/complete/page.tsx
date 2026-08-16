@@ -1,41 +1,38 @@
-import Link from 'next/link';
-import { BuntingDivider } from '@/components/BuntingDivider';
-import '../../../../globals.css';
+'use client';
 
-export default function JobCompletionPage({ params }: { params: { id: string } }) {
+import React from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { BuntingDivider } from '@/lib/ui';
+
+export default function JobCompletionPage() {
+  const params = useParams();
+  const jobId = (params?.id as string) || 'JOB-101';
+
   return (
     <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-wheat)' }}>
       <BuntingDivider flags={30} />
       
-      <div style={{ flex: 1, padding: '2rem', maxWidth: '600px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ flex: 1, padding: '2rem', maxWidth: '600px', margin: '0 auto', width: '100%' }}>
+        <Link href="/provider/jobs" style={{ color: 'var(--color-terracotta)', fontWeight: 'bold', display: 'inline-block', marginBottom: '1rem' }}>
+          ← Back to Jobs
+        </Link>
         
-        <div className="card" style={{ width: '100%', textAlign: 'center', padding: '3rem 2rem' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>✅</div>
-          <h1 style={{ fontSize: '2.5rem', color: 'var(--color-leaf)', marginBottom: '1rem' }}>
-            Job Complete!
-          </h1>
-          <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', fontSize: '1.2rem' }}>
-            You have marked Job #{params.id} as complete. The customer has been notified.
-          </p>
-          
-          <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-wheat-deep)', borderRadius: '8px', marginBottom: '2rem' }}>
-            <p style={{ margin: 0, color: 'var(--color-soil)', opacity: 0.8 }}>Escrow Payment</p>
-            <p style={{ margin: '0.5rem 0 0 0', fontSize: '2rem', fontWeight: 'bold', color: 'var(--color-indigo)' }}>₹500.00</p>
-            <p style={{ margin: '0.5rem 0 0 0', color: 'var(--color-leaf)', fontWeight: 'bold' }}>Will be released to your wallet shortly.</p>
+        <h1 style={{ fontSize: '2.5rem', color: 'var(--color-leaf)', marginBottom: '0.5rem' }}>
+          Complete Job #{jobId}
+        </h1>
+        <p style={{ color: 'var(--color-soil)', marginBottom: '2rem' }}>
+          Confirm payment and mark this service job as completed.
+        </p>
+
+        <div className="card" style={{ backgroundColor: 'white' }}>
+          <p style={{ fontWeight: 'bold', color: 'var(--color-indigo)' }}>Total Fee Collected: ₹500</p>
+          <div style={{ marginTop: '1.5rem' }}>
+            <Link href="/provider/jobs">
+              <button className="btn btn-leaf" style={{ width: '100%' }}>Confirm & Complete</button>
+            </Link>
           </div>
-
-          <Link href="/provider/earnings">
-            <button className="btn btn-turmeric" style={{ width: '100%', marginBottom: '1rem' }}>
-              View Earnings
-            </button>
-          </Link>
-          <Link href="/home">
-            <button className="btn" style={{ width: '100%', backgroundColor: 'transparent', border: 'none', color: 'var(--color-indigo)', fontWeight: 'bold' }}>
-              Back to Dashboard
-            </button>
-          </Link>
         </div>
-
       </div>
     </main>
   );

@@ -1,10 +1,57 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { BuntingDivider } from '@/lib/ui';
+import { useGaonSathi } from '@/lib/store/GaonSathiContext';
 import '../../../globals.css';
 
 export default function AddProductPage() {
+  const { addShopProduct } = useGaonSathi();
+  const router = useRouter();
+
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState<'Fertilizer' | 'Seeds' | 'Pesticides' | 'Tools'>('Fertilizer');
+  const [shopName, setShopName] = useState('Patel Krushi Kendra');
+  const [village, setVillage] = useState('Motipur');
+  const [price, setPrice] = useState('450');
+  const [stock, setStock] = useState('50');
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const getCategoryIcon = (cat: string) => {
+    switch (cat) {
+      case 'Fertilizer': return '🌱';
+      case 'Seeds': return '🌿';
+      case 'Pesticides': return '🧪';
+      case 'Tools': return '🪓';
+      default: return '📦';
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !price || !stock) {
+      alert('Please fill product name, price, and initial stock.');
+      return;
+    }
+
+    addShopProduct({
+      name,
+      category,
+      shopName,
+      price: Number(price),
+      stock: Number(stock),
+      village,
+      icon: getCategoryIcon(category)
+    });
+
+    setShowSuccess(true);
+    setTimeout(() => {
+      router.push('/agri/shop');
+    }, 1500);
+  };
+
   return (
     <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-wheat)' }}>
       <BuntingDivider flags={30} />
@@ -17,56 +64,95 @@ export default function AddProductPage() {
         <h1 style={{ fontSize: '2.5rem', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>
           Add New Product
         </h1>
-        <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', fontSize: '1.2rem' }}>
-          List a new item on the Gaon Sathi marketplace.
+        <p style={{ color: 'var(--color-soil)', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+          List a new fertilizer, seeds, or pesticide item on the Gaon Sathi marketplace.
         </p>
 
-        <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', borderTop: '6px solid var(--color-leaf)' }}>
+        {showSuccess && (
+          <div style={{ backgroundColor: '#DEF7EC', border: '2px solid #31C48D', color: '#03543F', padding: '16px', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 'bold', textAlign: 'center' }}>
+            🎉 Product published to `/agri/shop` marketplace & submitted to Sub-Admin for catalog review!
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="card" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', borderTop: '6px solid var(--color-leaf)' }}>
           
-          {/* Photo Upload Area */}
           <div>
-            <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Product Photo (ફોટો)</label>
-            <div style={{ border: '3px dashed var(--color-leaf)', backgroundColor: 'var(--color-wheat-deep)', borderRadius: '12px', height: '150px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-              <span style={{ fontSize: '3rem' }}>📷</span>
-              <span style={{ color: 'var(--color-leaf)', fontWeight: 'bold', marginTop: '0.5rem' }}>Tap to upload</span>
-            </div>
-          </div>
-
-          {/* Details */}
-          <div>
-            <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Product Name (નામ)</label>
-            <input type="text" placeholder="e.g. DAP Fertilizer 50kg" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid var(--color-wheat-deep)', fontSize: '1.1rem' }} />
+            <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Product Name (નામ)</label>
+            <input 
+              type="text" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Zinc Sulphate 33% (5kg) or Hybrid Bajra Seeds" 
+              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem' }} 
+              required
+            />
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Category (વસ્તુનો પ્રકાર)</label>
-            <select style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid var(--color-wheat-deep)', fontSize: '1.1rem', backgroundColor: 'white' }}>
-              <option>ખાતર (Fertilizer)</option>
-              <option>બિયારણ (Seeds)</option>
-              <option>દવા (Pesticides)</option>
-              <option>ઓજારો (Tools)</option>
+            <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Category (વસ્તુનો પ્રકાર)</label>
+            <select 
+              value={category}
+              onChange={(e) => setCategory(e.target.value as 'Fertilizer' | 'Seeds' | 'Pesticides' | 'Tools')}
+              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem', backgroundColor: 'white' }}
+            >
+              <option value="Fertilizer">🌱 ખાતર (Fertilizer)</option>
+              <option value="Seeds">🌿 બિયારણ (Seeds)</option>
+              <option value="Pesticides">🧪 દવા (Pesticides)</option>
+              <option value="Tools">🪓 ખેત ઓજારો (Tools)</option>
             </select>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Price (ભાવ) ₹</label>
-              <input type="number" placeholder="0.00" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid var(--color-wheat-deep)', fontSize: '1.1rem' }} />
+              <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Shop Name</label>
+              <input 
+                type="text" 
+                value={shopName}
+                onChange={(e) => setShopName(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem' }} 
+                required
+              />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Stock (સ્ટોક)</label>
-              <input type="number" placeholder="50" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid var(--color-wheat-deep)', fontSize: '1.1rem' }} />
+              <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Village</label>
+              <input 
+                type="text" 
+                value={village}
+                onChange={(e) => setVillage(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem' }} 
+                required
+              />
             </div>
           </div>
 
-          {/* Submit */}
-          <Link href="/shop/inventory" onClick={() => alert("Product successfully published to Gaon Sathi marketplace!")}>
-            <button className="btn btn-leaf" style={{ padding: '16px', fontSize: '1.2rem', width: '100%', marginTop: '1rem' }}>
-              Publish to Marketplace
-            </button>
-          </Link>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Price (ભાવ) ₹</label>
+              <input 
+                type="number" 
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem' }} 
+                required
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-indigo)', marginBottom: '0.5rem' }}>Initial Stock (જથ્થો)</label>
+              <input 
+                type="number" 
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-soil)', fontSize: '1rem' }} 
+                required
+              />
+            </div>
+          </div>
 
-        </div>
+          <button type="submit" className="btn btn-leaf" style={{ padding: '14px', fontSize: '1.1rem', width: '100%', marginTop: '0.5rem' }}>
+            Publish to Village Shop
+          </button>
+
+        </form>
       </div>
     </main>
   );

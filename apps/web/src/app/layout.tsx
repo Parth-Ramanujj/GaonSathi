@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { OfflineBanner } from '@/lib/ui';
+import { GaonSathiProvider } from '@/lib/store/GaonSathiContext';
+import { RoleSwitcherBar } from '@/components/RoleSwitcherBar';
 
 export const metadata: Metadata = {
-  title: "Gaon Sathi",
-  description: "Rural-India super-app combining Agri-Tech and Local Services",
+  title: "Gaon Sathi - ગ્રામ સાથી",
+  description: "Rural-India super-app combining Agri-Tech, Local Services, and Marketplaces",
 };
-
-import { OfflineBanner } from '@/lib/ui';
 
 export default function RootLayout({
   children,
@@ -16,9 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <OfflineBanner />
-        {children}
+        <GaonSathiProvider>
+          <RoleSwitcherBar />
+          <OfflineBanner />
+          {children}
+        </GaonSathiProvider>
       </body>
     </html>
   );
 }
+
