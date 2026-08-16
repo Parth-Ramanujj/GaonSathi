@@ -13,8 +13,8 @@
     "test": "turbo run test"
   },
   "engines": {
-    "node": "20.x",
-    "npm": "10.x"
+    "node": "24.x",
+    "npm": ">=10.x"
   },
   "devDependencies": {
     "turbo": "latest"
