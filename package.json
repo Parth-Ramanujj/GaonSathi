@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && node -e \"const fs = require('fs'); if (fs.existsSync('apps/web/out')) { fs.cpSync('apps/web/out', 'out', { recursive: true }); console.log('Successfully copied apps/web/out to ./out for Vercel'); }\"",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test"
