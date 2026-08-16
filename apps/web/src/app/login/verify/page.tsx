@@ -6,29 +6,32 @@ import { BuntingDivider } from '@/lib/ui';
 import '../../globals.css';
 
 function VerifyForm() {
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState('123456');
   const router = useRouter();
   const searchParams = useSearchParams();
-  const phone = searchParams.get('phone') || '';
+  const phone = searchParams.get('phone') || '9876543210';
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
     if (otp.length === 6) {
-      // In a real app, verify OTP via API
       router.push(`/onboarding/role`);
     }
+  };
+
+  const handleQuickEnter = () => {
+    router.push('/home');
   };
 
   return (
     <div className="card" style={{ width: '100%', maxWidth: '400px' }}>
       <h1 style={{ fontSize: '2rem', color: 'var(--color-indigo)', marginBottom: '0.5rem', textAlign: 'center' }}>
-        Verify OTP
+        Verify OTP / ઓટીપી ચકાસણી
       </h1>
-      <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', textAlign: 'center' }}>
+      <p style={{ color: 'var(--color-soil)', marginBottom: '1.5rem', textAlign: 'center' }}>
         Enter the 6-digit code sent to +91 {phone}
       </p>
 
-      <form onSubmit={handleVerify} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <form onSubmit={handleVerify} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           <label htmlFor="otp" style={{ fontWeight: '600' }}>One Time Password</label>
           <input 
@@ -52,7 +55,16 @@ function VerifyForm() {
         </div>
         
         <button type="submit" className="btn btn-leaf" style={{ width: '100%' }}>
-          Verify & Continue
+          Verify & Continue →
+        </button>
+
+        <button 
+          type="button" 
+          onClick={handleQuickEnter}
+          className="btn btn-turmeric" 
+          style={{ width: '100%' }}
+        >
+          🚀 Go directly to Home
         </button>
       </form>
     </div>

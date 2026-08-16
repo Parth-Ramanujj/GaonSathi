@@ -6,7 +6,7 @@ import { BuntingDivider } from '@/lib/ui';
 import '../../globals.css';
 
 export default function RoleSelectionPage() {
-  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>(['FARMER']);
   const router = useRouter();
 
   const toggleRole = (role: string) => {
@@ -16,9 +16,11 @@ export default function RoleSelectionPage() {
   };
 
   const handleContinue = () => {
-    if (selectedRoles.length > 0) {
-      router.push('/onboarding/profile');
-    }
+    router.push('/onboarding/profile');
+  };
+
+  const handleSkip = () => {
+    router.push('/home');
   };
 
   const roles = [
@@ -34,10 +36,10 @@ export default function RoleSelectionPage() {
       
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem' }}>
         <h1 style={{ fontSize: '2.5rem', color: 'var(--color-indigo)', marginBottom: '0.5rem', textAlign: 'center' }}>
-          Who are you?
+          Who are you? / તમે કોણ છો?
         </h1>
-        <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.2rem' }}>
-          Select all the roles that apply to you. You can change this later.
+        <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', textAlign: 'center', fontSize: '1.1rem' }}>
+          Select your roles or continue directly to explore all services.
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '500px' }}>
@@ -54,7 +56,7 @@ export default function RoleSelectionPage() {
                   border: isSelected ? `2px solid ${role.color}` : '2px solid transparent',
                   backgroundColor: isSelected ? 'var(--color-wheat-deep)' : 'var(--color-paper)',
                   transition: 'all 0.2s ease',
-                  borderTopWidth: '6px' // Keep top border thick
+                  borderTopWidth: '6px'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -81,16 +83,27 @@ export default function RoleSelectionPage() {
           
           <button 
             onClick={handleContinue}
-            disabled={selectedRoles.length === 0}
             className="btn btn-indigo" 
             style={{ 
-              marginTop: '1rem', 
-              backgroundColor: selectedRoles.length > 0 ? 'var(--color-indigo)' : '#ccc',
+              marginTop: '0.5rem', 
+              backgroundColor: 'var(--color-indigo)',
               color: 'white',
-              cursor: selectedRoles.length > 0 ? 'pointer' : 'not-allowed'
+              cursor: 'pointer'
             }}
           >
-            Continue
+            Continue to Profile Setup →
+          </button>
+
+          <button 
+            onClick={handleSkip}
+            className="btn btn-turmeric" 
+            style={{ 
+              backgroundColor: 'var(--color-turmeric)',
+              color: 'var(--color-soil)',
+              cursor: 'pointer'
+            }}
+          >
+            🚀 Skip & Go to Home Screen
           </button>
         </div>
       </div>

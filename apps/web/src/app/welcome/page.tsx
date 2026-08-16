@@ -16,16 +16,20 @@ export default function WelcomePage() {
         <div className="card" style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>Select Language</h2>
           
-          <Link href="/login" style={{ width: '100%' }}>
-            <button className="btn btn-turmeric" style={{ width: '100%' }}>ગુજરાતી</button>
+          <Link href="/home" className="btn btn-turmeric" style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}>
+            ગુજરાતી (Enter App)
           </Link>
           
-          <Link href="/login" style={{ width: '100%' }}>
-            <button className="btn btn-leaf" style={{ width: '100%' }}>हिंदी</button>
+          <Link href="/home" className="btn btn-leaf" style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}>
+            हिंदी (Enter App)
           </Link>
           
-          <Link href="/login" style={{ width: '100%' }}>
-            <button className="btn btn-indigo" style={{ width: '100%', backgroundColor: 'var(--color-indigo)', color: 'white' }}>English</button>
+          <Link href="/home" className="btn btn-indigo" style={{ width: '100%', textAlign: 'center', textDecoration: 'none', backgroundColor: 'var(--color-indigo)', color: 'white' }}>
+            English (Enter App)
+          </Link>
+
+          <Link href="/login" style={{ textAlign: 'center', color: 'var(--color-soil)', fontSize: '0.9rem', marginTop: '0.5rem', textDecoration: 'underline' }}>
+            Go to Login / OTP Verification →
           </Link>
         </div>
       </div>

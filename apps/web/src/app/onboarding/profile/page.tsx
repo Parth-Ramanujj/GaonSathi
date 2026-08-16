@@ -6,15 +6,17 @@ import { BuntingDivider } from '@/lib/ui';
 import '../../globals.css';
 
 export default function ProfileSetupPage() {
-  const [name, setName] = useState('');
-  const [pincode, setPincode] = useState('');
+  const [name, setName] = useState('Ramesh Patel');
+  const [pincode, setPincode] = useState('380001');
   const router = useRouter();
 
   const handleComplete = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name && pincode) {
-      router.push('/home');
-    }
+    router.push('/home');
+  };
+
+  const handleSkip = () => {
+    router.push('/home');
   };
 
   return (
@@ -24,13 +26,13 @@ export default function ProfileSetupPage() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
         <div className="card" style={{ width: '100%', maxWidth: '400px' }}>
           <h1 style={{ fontSize: '2rem', color: 'var(--color-leaf)', marginBottom: '0.5rem', textAlign: 'center' }}>
-            Profile Setup
+            Profile Setup / પ્રોફાઇલ
           </h1>
-          <p style={{ color: 'var(--color-soil)', marginBottom: '2rem', textAlign: 'center' }}>
+          <p style={{ color: 'var(--color-soil)', marginBottom: '1.5rem', textAlign: 'center' }}>
             Tell us a bit about yourself
           </p>
 
-          <form onSubmit={handleComplete} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <form onSubmit={handleComplete} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="name" style={{ fontWeight: '600' }}>Full Name</label>
@@ -71,8 +73,17 @@ export default function ProfileSetupPage() {
               />
             </div>
             
-            <button type="submit" className="btn btn-leaf" style={{ width: '100%', marginTop: '1rem' }}>
-              Complete Setup
+            <button type="submit" className="btn btn-leaf" style={{ width: '100%', marginTop: '0.5rem' }}>
+              Complete Setup & Enter Home →
+            </button>
+
+            <button 
+              type="button" 
+              onClick={handleSkip}
+              className="btn btn-turmeric" 
+              style={{ width: '100%' }}
+            >
+              🚀 Skip & Go to Home Screen
             </button>
           </form>
         </div>
